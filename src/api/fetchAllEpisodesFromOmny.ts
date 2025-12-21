@@ -1,4 +1,4 @@
-import { Clip, Program } from "../types/types";
+import { Clip } from "../types/types";
 
 const BASE_URL = process.env.EXPO_PUBLIC_BASE_URL;
 const ORG_ID = process.env.EXPO_PUBLIC_ORG_ID;

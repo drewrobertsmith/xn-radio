@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchContentFromOmny } from "../api/fetchContentFromOmny";
-import { CustomFieldData, Program, ProgramStatus } from "../types/types";
+import { Program, ProgramStatus } from "../types/types";
 import { useCallback } from "react";
 
 function usePrograms(status: ProgramStatus) {
