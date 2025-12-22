@@ -13,7 +13,7 @@ export const Player = () => {
 
   return (
     <View
-      className="justify-center bg-background-light border-border p-1"
+      className="justify-center bg-background-light border-border p-1 shadow-lg"
       style={[
         {
           position: "absolute",
