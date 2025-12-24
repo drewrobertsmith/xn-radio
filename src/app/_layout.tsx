@@ -6,10 +6,11 @@ import { QueryClient } from "@tanstack/react-query";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { clientPersister } from "../utils/mmkv";
 import * as SecureStore from "expo-secure-store";
-import { Platform } from "react-native";
+import { Platform, StyleProp } from "react-native";
 import { AudioProvider } from "../providers/audio-provider";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { TabBarHeightProvider } from "../providers/tabBarheight-provider";
+import { useResolveClassNames } from "uniwind";
 
 export default function RootLayout() {
   const queryClient = new QueryClient({
@@ -29,6 +30,8 @@ export default function RootLayout() {
     setItem: SecureStore.setItemAsync,
     removeItem: SecureStore.deleteItemAsync,
   };
+
+  const headerStyle = useResolveClassNames("bg-background-dark");
 
   return (
     <PersistQueryClientProvider
@@ -51,6 +54,9 @@ export default function RootLayout() {
                 name="profile"
                 options={{
                   presentation: "modal",
+                  headerShadowVisible: false,
+                  headerTitle: "",
+                  headerStyle: headerStyle,
                 }}
               />
             </Stack>

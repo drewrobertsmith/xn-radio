@@ -34,8 +34,8 @@ export const AudioProvider = ({ children }: { children: React.ReactNode }) => {
   const play = (item: Track) => {
     player.setActiveForLockScreen(
       true,
-      { title: item.title, artist: item.artist, artworkUrl: item.artwork },
-      { showSeekBackward: true, showSeekForward: true },
+      // { title: item.title, artist: item.artist, artworkUrl: item.artwork },
+      // { showSeekBackward: true, showSeekForward: true }, //this needs ot know if the item is livestream or not, probably add to the custom track type
     );
     setCurrentTrack(item);
     player.replace({ uri: item.url });

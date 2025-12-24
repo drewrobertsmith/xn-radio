@@ -44,7 +44,7 @@ export default function Profile() {
   const user = useQuery(api.auth.currentUser);
 
   return (
-    <View className="flex-1 justify-center items-center">
+    <View className="flex-1 justify-center items-center bg-background-dark">
       <AuthLoading>
         <ActivityIndicator size="small" />
       </AuthLoading>
@@ -59,10 +59,12 @@ export default function Profile() {
             width: 50,
             height: 50,
             borderRadius: 15,
+            borderCurve: "continuous",
+            marginBottom: 4,
           }}
         />
-        <Text>{user?.name}</Text>
-        <Text>{user?.email}</Text>
+        <Text className="text-primary">{user?.name}</Text>
+        <Text className="text-primary">{user?.email}</Text>
         <SignOut />
       </Authenticated>
     </View>

@@ -11,6 +11,7 @@ import { useCSSVariable, useResolveClassNames } from "uniwind";
 import HomeIcon from "../../components/ui/home-icon.jsx";
 import MicIcon from "../../components/ui/mic-icon.jsx";
 import MusicIcon from "../../components/ui/music-icon.jsx";
+import { useAudio } from "@/src/providers/audio-provider";
 
 export default function TabsLayout() {
   const tabStyle = useResolveClassNames("bg-background-dark");
@@ -19,6 +20,7 @@ export default function TabsLayout() {
   const tabBarActiveTintColor = useCSSVariable("--color-primary-brand");
   const user = useQuery(api.auth.currentUser);
   const { isAuthenticated } = useConvexAuth();
+  const { currentTrack } = useAudio();
 
   return (
     <TabBarHeightProvider>
@@ -74,7 +76,7 @@ export default function TabsLayout() {
           }}
         />
       </Tabs>
-      <Player />
+      {!currentTrack ? null : <Player />}
     </TabBarHeightProvider>
   );
 }

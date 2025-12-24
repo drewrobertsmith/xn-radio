@@ -2,8 +2,10 @@ import { Text, View } from "react-native";
 import { useTabBarHeight } from "../providers/tabBarheight-provider";
 import { useAudio } from "../providers/audio-provider";
 import { Image } from "expo-image";
-import Feather from "@expo/vector-icons/Feather";
 import { PressableOpacity } from "pressto";
+import PlayIcon from "../components/ui/play-icon.jsx";
+import PauseIcon from "../components/ui/pause-icon.jsx";
+import PlayButton from "./play-button";
 
 export const MINI_PLAYER_HEIGHT = 64;
 
@@ -27,7 +29,7 @@ export const Player = () => {
         },
       ]}
     >
-      <View className="flex-row items-center justify-between gap-1">
+      <View className="justify-between flex-row items-center gap-1">
         <Image
           source={currentTrack?.artwork}
           contentFit="cover"
@@ -41,17 +43,7 @@ export const Player = () => {
         <Text className="w-[65%] text-primary font-semibold" numberOfLines={2}>
           {currentTrack?.title}
         </Text>
-        <PressableOpacity
-          onPress={() => {
-            status.playing ? pause() : player.play();
-          }}
-        >
-          <Feather
-            name={status.playing ? "pause-circle" : "play-circle"}
-            size={40}
-            color="black"
-          />
-        </PressableOpacity>
+        <PlayButton buttonType="Player" />
       </View>
     </View>
   );
