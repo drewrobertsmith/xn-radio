@@ -9,6 +9,8 @@ import { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, ScrollView, Text, View } from "react-native";
 import { LegendList } from "@legendapp/list";
 import { Link } from "expo-router";
+import { useTabBarHeight } from "@/src/providers/tabBarheight-provider";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
 export default function Podcasts() {
   const {
@@ -26,6 +28,7 @@ export default function Podcasts() {
   const FOLLOWED_SHOWS_KEY = "followed_shows";
   const isLoadedRef = useRef(false);
   const [followedShows, setFollowedShows] = useState<Program[]>([]);
+  const height = useBottomTabBarHeight();
 
   useEffect(() => {
     const savedShowsJSON = mmkv.getString(FOLLOWED_SHOWS_KEY);
@@ -62,6 +65,9 @@ export default function Podcasts() {
     <ScrollView
       className="bg-background-dark flex-1"
       contentContainerClassName="gap-4 p-2"
+      contentContainerStyle={{
+        paddingBottom: height,
+      }}
       showsVerticalScrollIndicator={false}
     >
       <Link href={"/search"}>

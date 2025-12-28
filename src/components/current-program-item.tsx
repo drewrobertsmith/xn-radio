@@ -3,7 +3,6 @@ import { Program } from "../types/types";
 import { withUniwind } from "uniwind";
 import { Image } from "expo-image";
 import { Text, View } from "react-native";
-import Feather from "@expo/vector-icons/Feather";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Link } from "expo-router";

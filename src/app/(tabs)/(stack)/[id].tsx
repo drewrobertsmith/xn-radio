@@ -4,6 +4,7 @@ import { LegendList } from "@legendapp/list";
 import { useLocalSearchParams } from "expo-router";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import EpisodeListItem from "@/src/components/episode-list-item";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
 function Separator() {
   return (
@@ -19,13 +20,22 @@ function Separator() {
 export default function ProgramPage() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { data, isLoading, isError } = useClips(id);
+  const height = useBottomTabBarHeight();
 
   if (isLoading) {
-    return <ActivityIndicator size="small" />;
+    return (
+      <View className="flex-1 bg-background-dark">
+        <ActivityIndicator size="small" />
+      </View>
+    );
   }
 
   if (isError) {
-    return <Text className="text-primary">Error Loading Episodes</Text>;
+    return (
+      <View className="flex-1 bg-background-dark">
+        <Text className="text-primary">Error Loading Episodes</Text>
+      </View>
+    );
   }
 
   return (
@@ -37,6 +47,9 @@ export default function ProgramPage() {
         ListEmptyComponent={ListEmptyComponent}
         showsVerticalScrollIndicator={false}
         ItemSeparatorComponent={Separator}
+        contentContainerStyle={{
+          paddingBottom: height,
+        }}
       />
     </View>
   );

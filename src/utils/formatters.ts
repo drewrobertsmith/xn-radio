@@ -81,7 +81,7 @@ export function formatSeasonAndEpisode(
 ) {
   return seasonNumber && episodeNumber
     ? `S${seasonNumber} E${episodeNumber} - `
-    : "";
+    : null;
 }
 
 export function formatEpisodeType(episodeType: Clip["EpisodeType"]) {
