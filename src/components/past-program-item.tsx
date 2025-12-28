@@ -1,11 +1,10 @@
 import React from "react";
 import { Program } from "../types/types";
-import { withUniwind } from "uniwind";
-import Feather from "@expo/vector-icons/Feather";
 import { Text, View } from "react-native";
 import { Image } from "expo-image";
 import { PressableOpacity } from "pressto";
 import { Link } from "expo-router";
+import AddIcon from "./ui/add-icon";
 
 export default function PastProgramItem({
   item,
@@ -14,8 +13,6 @@ export default function PastProgramItem({
   item: Program;
   setFollowedShows: React.Dispatch<React.SetStateAction<Program[]>>;
 }) {
-  const StyledFeatherIcon = withUniwind(Feather);
-
   const handleFollowShow = () => {
     setFollowedShows((prevFollowedShows) => {
       const isAlreadyFollowed = prevFollowedShows.some(
@@ -42,7 +39,7 @@ export default function PastProgramItem({
                 width: 50,
                 height: 50,
                 borderRadius: 8,
-                borderCurve: 'continuous',
+                borderCurve: "continuous",
               }}
             />
             <View className="w-[85%]">
@@ -54,14 +51,13 @@ export default function PastProgramItem({
               </Text>
             </View>
           </View>
-          <View>
-            <StyledFeatherIcon
-              name="plus"
-              size={32}
-              colorClassName="text-primary"
-              onPress={handleFollowShow}
-            />
-          </View>
+          <PressableOpacity
+            style={{ width: 32, height: 32 }}
+            onPress={handleFollowShow}
+            hitSlop={4}
+          >
+            <AddIcon />
+          </PressableOpacity>
         </View>
       </PressableOpacity>
     </Link>

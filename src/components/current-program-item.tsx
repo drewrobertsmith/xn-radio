@@ -8,6 +8,7 @@ import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Link } from "expo-router";
 import { PressableOpacity } from "pressto";
+import AddIcon from "./ui/add-icon";
 
 export default function CurrentProgramItem({
   item,
@@ -57,24 +58,19 @@ export default function CurrentProgramItem({
                 </Text>
               </View>
             </View>
-            <Feather
-              name="plus"
-              size={32}
-              colorClassName="text-primary"
+            <PressableOpacity
+              style={{ width: 32, height: 32 }}
+              hitSlop={4}
               onPress={handleFollowShow}
-              style={{
-                zIndex: 1,
-              }}
-            />
+            >
+              <AddIcon />
+            </PressableOpacity>
           </View>
           <View className="flex-1">
             <Text className="text-muted" numberOfLines={5}>
               {item.Description}
             </Text>
           </View>
-          {/* <View className="flex-row"> */}
-          {/*   <Feather name="play-circle" size={32} colorClassName="text-primary" /> */}
-          {/* </View> */}
         </View>
       </PressableOpacity>
     </Link>

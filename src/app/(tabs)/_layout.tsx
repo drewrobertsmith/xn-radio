@@ -12,6 +12,7 @@ import HomeIcon from "../../components/ui/home-icon.jsx";
 import MicIcon from "../../components/ui/mic-icon.jsx";
 import MusicIcon from "../../components/ui/music-icon.jsx";
 import { useAudio } from "@/src/providers/audio-provider";
+import { PressableOpacity } from "pressto";
 
 export default function TabsLayout() {
   const tabStyle = useResolveClassNames("bg-background-dark");
@@ -35,7 +36,7 @@ export default function TabsLayout() {
           headerTitle: "",
           headerRight: () => (
             <Link href="/profile" asChild>
-              <TouchableOpacity>
+              <PressableOpacity>
                 <Image
                   source={
                     isAuthenticated ? user?.image : "https://placehold.co/30"
@@ -49,7 +50,7 @@ export default function TabsLayout() {
                     borderCurve: "continuous",
                   }}
                 />
-              </TouchableOpacity>
+              </PressableOpacity>
             </Link>
           ),
         }}

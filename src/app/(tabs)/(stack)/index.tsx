@@ -85,6 +85,7 @@ export default function Podcasts() {
           horizontal
           showsHorizontalScrollIndicator={false}
           ListEmptyComponent={ListEmptyComponent}
+          style={{ flex: 1 }}
         />
       </View>
       <View className="flex-1 w-full bg-background p-2 rounded-lg h-64">
@@ -101,6 +102,7 @@ export default function Podcasts() {
           horizontal
           showsHorizontalScrollIndicator={false}
           ListEmptyComponent={ListEmptyComponent}
+          style={{ flex: 1 }}
         />
       </View>
       <View className="flex-1 w-full bg-background p-2 rounded-lg">
@@ -112,6 +114,7 @@ export default function Podcasts() {
           )}
           keyExtractor={(item) => item.Id}
           ListEmptyComponent={ListEmptyComponent}
+          style={{ flex: 1 }}
         />
       </View>
     </ScrollView>
