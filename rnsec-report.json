@@ -1,0 +1,135 @@
+{
+  "findings": [
+    {
+      "ruleId": "NO_REQUEST_TIMEOUT",
+      "description": "fetch() without timeout - vulnerable to slowloris DoS",
+      "severity": "MEDIUM",
+      "filePath": "/Users/drewsmith/projects/XN/xn-radio/convex/db/actionsInternal.ts",
+      "line": 12,
+      "snippet": "    const url = `${BASE_URL}/orgs/${ORG_ID}/programs`;\n\n    const res = await fetch(url);\n    if (!res.ok) throw new Error(res.statusText);\n    const data = await res.json();",
+      "suggestion": "Add timeout to fetch using AbortSignal with setTimeout, or use a library like axios with timeout config."
+    },
+    {
+      "ruleId": "NO_REQUEST_TIMEOUT",
+      "description": "fetch() without timeout - vulnerable to slowloris DoS",
+      "severity": "MEDIUM",
+      "filePath": "/Users/drewsmith/projects/XN/xn-radio/convex/db/actionsInternal.ts",
+      "line": 35,
+      "snippet": "    for (const program of programs) {\n      const url = `${BASE_URL}/orgs/${ORG_ID}/programs/${program.omnyId}/clips`;\n      const res = await fetch(url);\n      if (!res.ok) throw new Error(res.statusText);\n      const data = await res.json();",
+      "suggestion": "Add timeout to fetch using AbortSignal with setTimeout, or use a library like axios with timeout config."
+    },
+    {
+      "ruleId": "NO_REQUEST_TIMEOUT",
+      "description": "fetch() without timeout - vulnerable to slowloris DoS",
+      "severity": "MEDIUM",
+      "filePath": "/Users/drewsmith/projects/XN/xn-radio/src/api/fetchAllEpisodesFromOmny.ts",
+      "line": 23,
+      "snippet": "\n  try {\n    const res = await fetch(url);\n    if (!res.ok) {\n      throw new Error(\"Network response was not okay\");",
+      "suggestion": "Add timeout to fetch using AbortSignal with setTimeout, or use a library like axios with timeout config."
+    },
+    {
+      "ruleId": "SENSITIVE_DATA_IN_ERROR_MESSAGES",
+      "description": "Error object logged directly - may contain sensitive data or stack traces",
+      "severity": "MEDIUM",
+      "filePath": "/Users/drewsmith/projects/XN/xn-radio/src/api/fetchAllEpisodesFromOmny.ts",
+      "line": 39,
+      "snippet": "    return json.Clips;\n  } catch (error) {\n    console.error(\"An error occurred in fetchContentFromOmny:\", error);\n    throw error;\n  }",
+      "suggestion": "Log only safe error properties (message, code). Sanitize error messages before displaying to users. Never expose stack traces in production."
+    },
+    {
+      "ruleId": "NO_REQUEST_TIMEOUT",
+      "description": "fetch() without timeout - vulnerable to slowloris DoS",
+      "severity": "MEDIUM",
+      "filePath": "/Users/drewsmith/projects/XN/xn-radio/src/api/fetchContentFromOmny.ts",
+      "line": 21,
+      "snippet": "\n  try {\n    const res = await fetch(url);\n    if (!res.ok) {\n      throw new Error(\"Network response was not okay\");",
+      "suggestion": "Add timeout to fetch using AbortSignal with setTimeout, or use a library like axios with timeout config."
+    },
+    {
+      "ruleId": "SENSITIVE_DATA_IN_ERROR_MESSAGES",
+      "description": "Error object logged directly - may contain sensitive data or stack traces",
+      "severity": "MEDIUM",
+      "filePath": "/Users/drewsmith/projects/XN/xn-radio/src/api/fetchContentFromOmny.ts",
+      "line": 56,
+      "snippet": "    return networkFilteredPrograms;\n  } catch (error) {\n    console.error(\"An error occurred in fetchContentFromOmny:\", error);\n    throw error;\n  }",
+      "suggestion": "Log only safe error properties (message, code). Sanitize error messages before displaying to users. Never expose stack traces in production."
+    },
+    {
+      "ruleId": "NO_REQUEST_TIMEOUT",
+      "description": "fetch() without timeout - vulnerable to slowloris DoS",
+      "severity": "MEDIUM",
+      "filePath": "/Users/drewsmith/projects/XN/xn-radio/src/api/fetchProgramByIdFromOmny.ts",
+      "line": 23,
+      "snippet": "\n  try {\n    const res = await fetch(url);\n    if (!res.ok) {\n      throw new Error(\"Network response was not okay\");",
+      "suggestion": "Add timeout to fetch using AbortSignal with setTimeout, or use a library like axios with timeout config."
+    },
+    {
+      "ruleId": "SENSITIVE_DATA_IN_ERROR_MESSAGES",
+      "description": "Error object logged directly - may contain sensitive data or stack traces",
+      "severity": "MEDIUM",
+      "filePath": "/Users/drewsmith/projects/XN/xn-radio/src/api/fetchProgramByIdFromOmny.ts",
+      "line": 34,
+      "snippet": "    return json;\n  } catch (error) {\n    console.error(\"An error occurred in fetchProgramByIdFromOmny:\", error);\n    throw error;\n  }",
+      "suggestion": "Log only safe error properties (message, code). Sanitize error messages before displaying to users. Never expose stack traces in production."
+    },
+    {
+      "ruleId": "ANDROID_CLEARTEXT_ENABLED",
+      "description": "android:usesCleartextTraffic is set to true",
+      "severity": "HIGH",
+      "filePath": "/Users/drewsmith/projects/XN/xn-radio/android/app/src/debugOptimized/AndroidManifest.xml",
+      "suggestion": "Disable cleartext traffic or use network security config to restrict it to specific domains"
+    },
+    {
+      "ruleId": "ANDROID_BACKUP_ALLOWED",
+      "description": "Backup enabled for app with sensitive data - data can be extracted via ADB",
+      "severity": "MEDIUM",
+      "filePath": "/Users/drewsmith/projects/XN/xn-radio/android/app/src/main/AndroidManifest.xml",
+      "suggestion": "Set android:allowBackup=\"false\" or implement android:fullBackupContent rules to exclude sensitive data."
+    },
+    {
+      "ruleId": "ANDROID_EXPORTED_COMPONENT",
+      "description": "Exported activity without permission protection - accessible by any app",
+      "severity": "HIGH",
+      "filePath": "/Users/drewsmith/projects/XN/xn-radio/android/app/src/main/AndroidManifest.xml",
+      "suggestion": "Add android:permission attribute to exported activity or set android:exported=\"false\" if external access is not needed."
+    },
+    {
+      "ruleId": "ANDROID_INTENT_FILTER_PERMISSIVE",
+      "description": "Permissive intent filter with android.intent.action.VIEW: Can be invoked by any app",
+      "severity": "MEDIUM",
+      "filePath": "/Users/drewsmith/projects/XN/xn-radio/android/app/src/main/AndroidManifest.xml",
+      "suggestion": "Validate all incoming intents and restrict with custom permissions if external access is not required."
+    },
+    {
+      "ruleId": "EXCESSIVE_PERMISSIONS",
+      "description": "Potentially excessive permissions declared: android.permission.READ_EXTERNAL_STORAGE, android.permission.WRITE_EXTERNAL_STORAGE",
+      "severity": "LOW",
+      "filePath": "/Users/drewsmith/projects/XN/xn-radio/android/app/src/main/AndroidManifest.xml",
+      "suggestion": "Review declared permissions and remove those not actively used. Request permissions at runtime only when needed."
+    },
+    {
+      "ruleId": "IOS_USAGE_DESCRIPTIONS_MISSING",
+      "description": "Missing Location (Always) usage description - Apple App Store requirement",
+      "severity": "LOW",
+      "filePath": "/Users/drewsmith/projects/XN/xn-radio/ios/xnradio/Info.plist",
+      "suggestion": "Add NSLocationAlwaysUsageDescription to Info.plist with a clear explanation of why Location (Always) access is needed. This is required for App Store submission."
+    },
+    {
+      "ruleId": "IOS_BACKGROUND_MODES_UNNECESSARY",
+      "description": "Background mode 'audio' enabled: Audio mode keeps app active in background",
+      "severity": "LOW",
+      "filePath": "/Users/drewsmith/projects/XN/xn-radio/ios/xnradio/Info.plist",
+      "suggestion": "Ensure 'audio' background mode is necessary. Remove if not required to reduce attack surface and improve privacy."
+    },
+    {
+      "ruleId": "IOS_DATA_PROTECTION_MISSING",
+      "description": "Sensitive app without data protection entitlement",
+      "severity": "LOW",
+      "filePath": "/Users/drewsmith/projects/XN/xn-radio/ios/xnradio/Info.plist",
+      "suggestion": "Enable data protection (NSFileProtectionComplete) to encrypt files when device is locked."
+    }
+  ],
+  "scannedFiles": 122,
+  "duration": 406,
+  "timestamp": "2025-12-28T20:18:56.118Z"
+}

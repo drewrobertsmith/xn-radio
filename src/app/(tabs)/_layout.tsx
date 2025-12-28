@@ -66,6 +66,7 @@ export default function TabsLayout() {
           name="(stack)"
           options={{
             title: "Podcasts",
+            headerShown: false,
             tabBarIcon: ({ focused }) => <MicIcon focused={focused} />,
           }}
         />

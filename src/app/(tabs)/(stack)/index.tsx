@@ -11,6 +11,7 @@ import { LegendList } from "@legendapp/list";
 import { Link } from "expo-router";
 import { useTabBarHeight } from "@/src/providers/tabBarheight-provider";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function Podcasts() {
   const {
@@ -29,6 +30,7 @@ export default function Podcasts() {
   const isLoadedRef = useRef(false);
   const [followedShows, setFollowedShows] = useState<Program[]>([]);
   const height = useBottomTabBarHeight();
+  const inset = useSafeAreaInsets();
 
   useEffect(() => {
     const savedShowsJSON = mmkv.getString(FOLLOWED_SHOWS_KEY);
@@ -69,6 +71,9 @@ export default function Podcasts() {
         paddingBottom: height,
       }}
       showsVerticalScrollIndicator={false}
+      style={{
+        paddingTop: inset.top,
+      }}
     >
       <Link href={"/search"}>
         <View className="w-full p-2 bg-background-dark">

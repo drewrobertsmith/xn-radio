@@ -28,7 +28,7 @@ export const fetchAllEpisodesFromOmny = async (
     const json = await res.json();
 
     if (!json.Clips || json.Clips.length === 0) {
-      console.log("The 'Programs' array is missing or empty in the response.");
+      console.log("The 'Clips' array is missing or empty in the response.");
       return [];
     }
 

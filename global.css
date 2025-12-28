@@ -11,7 +11,9 @@
 
       /* Text */
       --color-primary: hsl(0 0 95%);
+      --color-primary-inverted: hsl(0 0% 5%);
       --color-muted: hsl(0 0% 70%);
+      --color-muted-inverted: hsl(0 0% 30%);
 
       /* Borders */
       --color-border: hsl(0 0% 30%);
@@ -29,7 +31,9 @@
 
       /* Text */
       --color-primary: hsl(0 0% 5%);
+      --color-primary-inverted: hsl(0 0 95%);
       --color-muted: hsl(0 0% 30%);
+      --color-muted-inverted: hsl(0 0% 70%);
 
       /* Borders */
       --color-border: hsl(0 0% 30%);
@@ -42,6 +46,7 @@
     /* Base configuration applies to all platforms */
     --font-sans: "Inter";
     --spacing-4: 16px;
+    --color-primary-light-default: hsl(0 0 95%);
 
     /* iOS-specific overrides */
     @media ios {

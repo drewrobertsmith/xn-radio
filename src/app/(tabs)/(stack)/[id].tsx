@@ -2,20 +2,11 @@ import ListEmptyComponent from "@/src/components/ui/list-empty";
 import useClips from "@/src/hooks/useClips";
 import { LegendList } from "@legendapp/list";
 import { useLocalSearchParams } from "expo-router";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, ScrollView, Text, View } from "react-native";
 import EpisodeListItem from "@/src/components/episode-list-item";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
-
-function Separator() {
-  return (
-    <View
-      className="border-border"
-      style={{
-        borderWidth: StyleSheet.hairlineWidth,
-      }}
-    />
-  );
-}
+import Separator from "@/src/components/ui/separator";
+import ProgramInfo from "@/src/components/program-info";
 
 export default function ProgramPage() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -39,7 +30,8 @@ export default function ProgramPage() {
   }
 
   return (
-    <View className="flex-1  bg-background-dark">
+    <ScrollView className="flex-1 bg-background-dark">
+      <ProgramInfo programID={id} />
       <LegendList
         data={data ?? []}
         keyExtractor={(item) => item.Id}
@@ -50,7 +42,8 @@ export default function ProgramPage() {
         contentContainerStyle={{
           paddingBottom: height,
         }}
+        style={{ flex: 1 }}
       />
-    </View>
+    </ScrollView>
   );
 }
