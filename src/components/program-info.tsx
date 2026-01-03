@@ -1,50 +1,68 @@
 import { Text, View } from "react-native";
 import useProgramById from "../hooks/useProgramById";
-import { Image, ImageBackground } from "expo-image";
+import { ImageBackground } from "expo-image";
 import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
-import { getColors, ImageColorsResult } from "react-native-image-colors";
+import { getColors } from "react-native-image-colors";
 import { useEffect, useState } from "react";
 
-export default function ProgramInfo({ programID }: { programID: string }) {
-  const { data: program } = useProgramById(programID);
-  const [colors, setColors] = useState();
+type ImageColorsState = {
+  colorOne: string;
+  colorTwo: string;
+  colorThree: string;
+  colorFour: string;
+} | null;
 
-  const fetchColors = async (imageUrl: string) => {
-    const result = await getColors(imageUrl, {
-      fallback: "#000000",
-      pixelSpacing: 5,
-      cache: true,
-      key: imageUrl,
-    });
-    switch (result.platform) {
-      case "android":
-      case "web":
-        setColors({
-          colorOne: { value: result.lightVibrant, name: "lightVibrant" },
-          colorTwo: { value: result.dominant, name: "dominant" },
-          colorThree: { value: result.vibrant, name: "vibrant" },
-          colorFour: { value: result.darkVibrant, name: "darkVibrant" },
-          rawResult: JSON.stringify(result),
-        });
-        break;
-      case "ios":
-        setColors({
-          colorOne: { value: result.background, name: "background" },
-          colorTwo: { value: result.detail, name: "detail" },
-          colorThree: { value: result.primary, name: "primary" },
-          colorFour: { value: result.secondary, name: "secondary" },
-          rawResult: JSON.stringify(result),
-        });
-        break;
-      default:
-        throw new Error("unexpected platform");
-    }
-  };
+export default function ProgramInfo({ programID }: { programID: string }) {
+  const { data: program, isLoading } = useProgramById(programID);
+  const [colors, setColors] = useState<ImageColorsState>(null);
 
   useEffect(() => {
-    fetchColors(program?.ArtworkUrl as string);
-  }, [program]);
+    if (!program?.ArtworkUrl) return;
+
+    const fetchColors = async () => {
+      try {
+        const result = await getColors(program.ArtworkUrl, {
+          fallback: "#000000",
+          pixelSpacing: 5,
+          cache: true,
+          key: program.ArtworkUrl,
+        });
+
+        switch (result.platform) {
+          case "android":
+          case "web":
+            setColors({
+              colorOne: result.lightVibrant,
+              colorTwo: result.vibrant,
+              colorThree: result.dominant,
+              colorFour: result.darkVibrant,
+            });
+            break;
+          case "ios":
+            setColors({
+              colorOne: result.background,
+              colorTwo: result.detail,
+              colorThree: result.primary,
+              colorFour: result.secondary,
+            });
+            break;
+          default:
+            console.warn("Unexpected platform for image colors");
+        }
+      } catch (e) {
+        console.error("Failed to extract colors:", e);
+      }
+    };
+
+    fetchColors();
+  }, [program?.ArtworkUrl]);
+
+  if (isLoading || !program) {
+    return <View className="bg-background-dark flex-1" />;
+  }
+
+  const gradientColor = colors?.colorThree ?? "transparent";
 
   return (
     <View className="flex-1 items-center">
@@ -58,7 +76,7 @@ export default function ProgramInfo({ programID }: { programID: string }) {
         }}
       >
         <LinearGradient
-          colors={["transparent", colors?.colorThree.value]}
+          colors={["transparent", gradientColor]}
           style={{
             position: "absolute",
             left: 0,

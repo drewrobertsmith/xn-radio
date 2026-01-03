@@ -66,7 +66,7 @@ export default function CurrentProgramItem({
             </PressableOpacity>
           </View>
           <View className="flex-1">
-            <Text className="text-muted" numberOfLines={5}>
+            <Text className="text-muted" numberOfLines={4}>
               {item.Description}
             </Text>
           </View>
